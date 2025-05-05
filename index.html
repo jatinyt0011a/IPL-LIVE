@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL 2025 Live | Stars Sports Hindi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e53535;
+            --secondary: #1a1a2e;
+            --accent: #00b4d8;
+            --light: #f8f9fa;
+            --dark: #16213e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary);
+            color: var(--light);
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--secondary), var(--dark));
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .match-info {
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .teams {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .team-logo {
+            width: 80px;
+            height: 80px;
+            background-color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .team-logo img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+        
+        .vs {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 1rem;
+            color: var(--accent);
+        }
+        
+        .match-details {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .match-details p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .player-container {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .player-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+        
+        #videoPlayer {
+            width: 100%;
+            background-color: #000;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(26, 26, 46, 0.9);
+            padding: 1rem;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+        
+        .quality-selector, .volume-control {
+            display: flex;
+            align-items: center;
+        }
+        
+        .quality-selector select, .volume-control input {
+            background: var(--dark);
+            color: var(--light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.5rem;
+            border-radius: 5px;
+            margin-left: 0.5rem;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .stat-card {
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: 10px;
+            padding: 1.5rem;
+            width: 32%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            border-bottom: 2px solid rgba(0, 180, 216, 0.3);
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer {
+            background: var(--dark);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .social-links a {
+            color: var(--light);
+            margin: 0 1rem;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            flex-direction: column;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .credit {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+            }
+            
+            .nav-links li {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .stats {
+                flex-direction: column;
+            }
+            
+            .stat-card {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+            
+            .teams {
+                flex-direction: column;
+            }
+            
+            .vs {
+                margin: 1rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/2/2d/Indian_Premier_League_Official_Logo.svg/1200px-Indian_Premier_League_Official_Logo.svg.png" alt="IPL Logo">
+            <h1>IPL 2025 Live</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#"><i class="fas fa-calendar-alt"></i> Schedule</a></li>
+            <li><a href="#"><i class="fas fa-table"></i> Points Table</a></li>
+            <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <div class="header">
+            <h2>IPL 2025 Live Streaming</h2>
+            <p>Watch all matches in HD quality with Hindi commentary</p>
+        </div>
+        
+        <div class="match-info">
+            <div class="teams">
+                <div class="team">
+                    <div class="team-logo">
+                        <img src="https://www.iplt20.com/assets/images/team-logos/59.png" alt="Sunrisers Hyderabad">
+                    </div>
+                    <h3>Sunrisers Hyderabad</h3>
+                </div>
+                <div class="vs">VS</div>
+                <div class="team">
+                    <div class="team-logo">
+                        <img src="https://www.iplt20.com/assets/images/team-logos/61.png" alt="Delhi Capitals">
+                    </div>
+                    <h3>Delhi Capitals</h3>
+                </div>
+            </div>
+            <div class="match-details">
+                <p><i class="fas fa-trophy"></i> Match 55 • IPL 2025</p>
+                <p><i class="fas fa-map-marker-alt"></i> Rajiv Gandhi International Stadium, Hyderabad</p>
+                <p><i class="far fa-clock"></i> Today • 7:30 PM IST</p>
+            </div>
+        </div>
+        
+        <div class="player-container">
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Loading stream...</p>
+            </div>
+            <video id="videoPlayer" width="100%" controls autoplay style="display: none;"></video>
+            <div class="controls">
+                <div class="quality-selector">
+                    <span><i class="fas fa-tachometer-alt"></i> Quality:</span>
+                    <select id="qualitySelector">
+                        <option value="auto">Auto</option>
+                        <option value="720">720p</option>
+                        <option value="480">480p</option>
+                        <option value="360">360p</option>
+                    </select>
+                </div>
+                <div class="volume-control">
+                    <span><i class="fas fa-volume-up"></i> Volume:</span>
+                    <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="1">
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <h3><i class="fas fa-chart-line"></i> Match Preview</h3>
+                <p>• SRH: 3 wins in last 5 matches</p>
+                <p>• DC: 2 wins in last 5 matches</p>
+                <p>• Last meeting: DC won by 7 wickets</p>
+                <p>• Key player: Mitchell Starc (DC)</p>
+            </div>
+            <div class="stat-card">
+                <h3><i class="fas fa-bullseye"></i> Players to Watch</h3>
+                <p>• Travis Head (SRH)</p>
+                <p>• Heinrich Klaasen (SRH)</p>
+                <p>• Mitchell Starc (DC)</p>
+                <p>• KL Rahul (DC)</p>
+            </div>
+            <div class="stat-card">
+                <h3><i class="fas fa-info-circle"></i> Match Context</h3>
+                <p>• DC fighting for playoff spot</p>
+                <p>• SRH nearly eliminated</p>
+                <p>• Pitch expected to be batting-friendly</p>
+                <p>• Toss crucial due to dew factor</p>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>© 2025 IPL Live Streaming. This is an unofficial website for educational purposes only.</p>
+        <p>All matches are property of the Board of Control for Cricket in India (BCCI).</p>
+    </footer>
+
+    <div class="credit">Live by @J4TNX</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('videoPlayer');
+            const loading = document.getElementById('loading');
+            const qualitySelector = document.getElementById('qualitySelector');
+            const volumeControl = document.getElementById('volumeControl');
+            
+            // Set initial volume
+            video.volume = volumeControl.value;
+            
+            // Volume control
+            volumeControl.addEventListener('input', function() {
+                video.volume = this.value;
+            });
+            
+            if (Hls.isSupported()) {
+                const hls = new Hls({
+                    maxMaxBufferLength: 30,
+                    maxBufferSize: 6000000,
+                    maxBufferLength: 30
+                });
+                
+                hls.loadSource('https://starsportshindiii.pages.dev/index.m3u8');
+                hls.attachMedia(video);
+                
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    loading.style.display = 'none';
+                    video.style.display = 'block';
+                    video.play();
+                    
+                    // Quality levels
+                    const levels = hls.levels;
+                    qualitySelector.innerHTML = '<option value="auto">Auto</option>';
+                    levels.forEach((level, index) => {
+                        qualitySelector.innerHTML += `<option value="${index}">${level.height}p</option>`;
+                    });
+                });
+                
+                // Quality change
+                qualitySelector.addEventListener('change', function() {
+                    if (this.value === 'auto') {
+                        hls.currentLevel = -1;
+                    } else {
+                        hls.currentLevel = parseInt(this.value);
+                    }
+                });
+                
+                // Error handling
+                hls.on(Hls.Events.ERROR, function(event, data) {
+                    if (data.fatal) {
+                        switch(data.type) {
+                            case Hls.ErrorTypes.NETWORK_ERROR:
+                                loading.innerHTML = '<i class="fas fa-wifi" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i><p>Network error. Trying to reconnect...</p>';
+                                hls.startLoad();
+                                break;
+                            case Hls.ErrorTypes.MEDIA_ERROR:
+                                loading.innerHTML = '<i class="fas fa-video-slash" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i><p>Media error. Reloading stream...</p>';
+                                hls.recoverMediaError();
+                                break;
+                            default:
+                                loading.innerHTML = '<i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i><p>Unable to load stream. Please try again later.</p>';
+                                break;
+                        }
+                    }
+                });
+                
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                // For Safari
+                loading.style.display = 'none';
+                video.style.display = 'block';
+                video.src = 'https://starsportshindiii.pages.dev/index.m3u8';
+                video.addEventListener('loadedmetadata', function() {
+                    video.play();
+                });
+            } else {
+                loading.innerHTML = '<i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i><p>Your browser does not support HLS streaming.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
